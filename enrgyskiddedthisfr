@@ -227,6 +227,19 @@ task.spawn(function ()
     end
 end)
 
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+while true do
+    wait(0.1)
+    local velocity = humanoid.Velocity
+    local speed = velocity.magnitude
+    if speed < 0 then
+        velocity = Vector3.new(0, 0, 0)
+        humanoid.Velocity = velocity
+    end
+end 
 
 local __index
 __index = hookmetamethod(game,"__index", function(Obj, Property)
